@@ -3,6 +3,7 @@ FLAGS=-Wall -Wextra -Werror
 NAME= libft.a
 SRCS= ft_atoi.c\
 ft_atof.c\
+ft_atol.c\
 ft_bzero.c\
 ft_calloc.c\
 ft_isalnum.c\
