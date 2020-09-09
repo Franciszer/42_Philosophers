@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/29 13:05:07 by user42            #+#    #+#             */
-/*   Updated: 2020/09/09 16:35:16 by frthierr         ###   ########.fr       */
+/*   Created: 2019/10/24 14:35:42 by frthierr          #+#    #+#             */
+/*   Updated: 2020/09/09 16:22:20 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int main(int argc, char const *argv[])
+size_t	ft_strlen(const char *str)
 {
-    t_philo_state philo_state;
+	int	i;
 
-    if (!get_philo_data(argc, argv, &philo_state))
-        return (1);
-    while (1)
-	{
-		ft_putstr("time : ");
-		ft_putnbr_fd(get_time_now(), 1);
-		ft_putchar_fd('\n', 1);
-	}
-    return 0;
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }

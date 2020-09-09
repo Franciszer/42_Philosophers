@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/08/29 15:11:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/09 16:30:54 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 # define PHILO_ONE_H
 
 # include <sys/time.h>
-# include "libft.h"
+# include <unistd.h>
 
-typedef struct  s_philo
+typedef struct  s_philo_state
 {
     long int        n_philosophers;
     long int        time_to_die;
@@ -25,15 +25,29 @@ typedef struct  s_philo
     long int        time_to_sleep;
     long int        max_eat_count;
     long int        start_time;
-}               t_philo;
+}               t_philo_state;
 
 typedef struct timeval t_timeval;
+
+/*
+** LIB FUNCTIONS
+*/
+
+size_t			ft_strlen(const char *str);
+void			ft_putnbr_fd(int n, int fd);
+void			ft_putchar_fd(char c, int fd);
+void			ft_putstr(char *s);
+void			ft_putstr_fd(char *s, int fd);
+void			ft_putendl_fd(char *s, int fd);
+long			ft_atol(const char *str);
+int				ft_perror(char *msg);
+
 
 /*
 ** INITIALIZING DATA
 */
 
-char            get_philo_data(int argc, char const *argv[], t_philo *philo_data);
+char            get_philo_data(int argc, char const *argv[], t_philo_state *philo_data);
 long int	    get_time_now(void);
 
 /*

@@ -3,12 +3,19 @@
 CC= cc
 FLAGS= -Wall -Wextra -Werror
 SRCS=	srcs/main.c\
-		srcs/get_philo_data.c
+		srcs/ft_atol.c\
+		srcs/get_philo_data.c\
+		srcs/ft_perror.c\
+		srcs/ft_putchar_fd.c\
+		srcs/ft_putendl_fd.c\
+		srcs/ft_putnbr_fd.c\
+		srcs/ft_putstr.c\
+		srcs/ft_putstr_fd.c\
+		srcs/ft_strlen.c
 
 NAME= philo_one
 OBJS= ${SRCS:.c=.o}
-INCLUDE_DIRS = -I . -I srcs/libft
-LIB= srcs/libft/libft.a
+INCLUDE_DIRS = -I .
 
 
 .c.o:
@@ -27,9 +34,8 @@ NC=\033[0m
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	@make -C srcs/libft
 	@printf "${YELLOW}=>	"
-	${CC} ${FLAGS} ${INCLUDE_DIRS} ${OBJS} ${LIB} -o ${NAME}
+	${CC} ${FLAGS} ${INCLUDE_DIRS} ${OBJS} -o ${NAME}
 	@echo "${GREEN}✓ ${NAME} compiled${NC}"
 
 start: all
