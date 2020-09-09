@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/29 13:05:07 by user42            #+#    #+#             */
-/*   Updated: 2020/09/09 18:53:25 by frthierr         ###   ########.fr       */
+/*   Created: 2019/10/24 14:37:15 by frthierr          #+#    #+#             */
+/*   Updated: 2020/09/09 16:21:14 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int main(int argc, char const *argv[])
+void	ft_putnbr_fd(int n, int fd)
 {
-    t_philo_state philo_state;
+	unsigned int	nbr;
 
-    if (!get_philo_data(argc, argv, &philo_state))
-        return (1);
-    if (!create_philosophers(&philo_state))
-		return (ERR_RET(ERR_ALLOC));
-	free(philo_state.philos);
-    return (0);
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		nbr = (unsigned int)(n * -1);
+	}
+	else
+		nbr = (unsigned int)n;
+	if (nbr >= 10)
+		ft_putnbr_fd(nbr / 10, fd);
+	ft_putchar_fd((char)(nbr % 10 + '0'), fd);
 }

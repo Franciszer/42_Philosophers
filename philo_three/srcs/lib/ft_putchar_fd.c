@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/29 13:05:07 by user42            #+#    #+#             */
-/*   Updated: 2020/09/09 18:53:25 by frthierr         ###   ########.fr       */
+/*   Created: 2019/10/24 14:37:29 by frthierr          #+#    #+#             */
+/*   Updated: 2020/09/09 16:21:21 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int main(int argc, char const *argv[])
+void	ft_putchar_fd(char c, int fd)
 {
-    t_philo_state philo_state;
-
-    if (!get_philo_data(argc, argv, &philo_state))
-        return (1);
-    if (!create_philosophers(&philo_state))
-		return (ERR_RET(ERR_ALLOC));
-	free(philo_state.philos);
-    return (0);
+	write(fd, &c, 1);
 }
