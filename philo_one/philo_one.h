@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/10 15:59:26 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/10 17:23:00 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define T_DEAD 5
 
 # define WRITE_PHILO_ACTION(type) write_liv_philo_action\
-						(get_time_now(&philo_state->start_time), index, type)
+				(get_time_now(&philo_state->start_time), index + 1, type, philo_state)
 
 /*
 ** STRUCTURE DEFINITIONS
@@ -52,6 +52,8 @@ typedef struct  s_philo_state
     long int        time_to_sleep;
     long int        max_eat_count;
     long int        start_time;
+	t_bool			dead;
+	pthread_mutex_t	write_lock;
 	t_philo			*philos;
 }               t_philo_state;
 
@@ -62,12 +64,6 @@ typedef struct	s_philo_arg
 }				t_philo_arg;
 
 typedef struct timeval t_timeval;
-
-/*
-** GLOBAL VARIABLES
-*/
-
-t_bool				g_philo_dead;
 
 /*
 **	ERROR HANDLING
@@ -115,8 +111,8 @@ t_bool			init_philo_threads(t_philo_state *philo_state);
 
 void			write_philo_action(long int timestamp, long int philo_index,\
 														char action_type);
-void			write_liv_philo_action(long int timestamp, long int philo_index,\
-														char action_type);
+void	write_liv_philo_action(long int timestamp, long int philo_index,\
+							char action_type, t_philo_state *philo_state);
 long int		get_time_now(long int *start_time);
 void			*philo_living_routine(void *philo_arg);
 void			*philo_monitoring_routine(void *philo_arg);

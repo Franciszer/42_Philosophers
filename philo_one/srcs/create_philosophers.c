@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 18:23:16 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/10 16:03:56 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/10 17:35:19 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,18 @@ t_bool	create_philosophers(t_philo_state *philo_state)
 	(t_philo*)malloc(sizeof(t_philo) * philo_state->n_philosophers)))
 		return (0);
 	i = -1;
+	pthread_mutex_init(&philo_state->write_lock, NULL);
 	while (++i < philo_state->n_philosophers)
 	{
 		if (pthread_mutex_init(&philo_state->philos[i].lock, NULL))
 			return (create_philosophers_return(philo_state));
 		philo_state->philos[i].index = i + 1;
 		philo_state->philos[i].last_eat = 0;
-		printf("index: %ld | max: %ld\n");
+		// printf("index: %ld | max: %ld\n", i, philo_state->n_philosophers);
 		if (i < philo_state->n_philosophers - 1)
 			philo_state->philos[i].next = &philo_state->philos[i + 1];
 	}
-	philo_state->philos[i].next = &philo_state->philos[0];
+	philo_state->philos[--i].next = &philo_state->philos[0];
 	return (1);
 }
 
@@ -54,9 +55,9 @@ t_bool	init_philo_threads(t_philo_state *philo_state)
 		if (!(philo_monitoring_arg = (t_philo_arg*)malloc(sizeof(t_philo_arg))))
 			return (0);
 		philo_liv_arg->philo_state = philo_state;
-		philo_liv_arg->index = i + 1;
+		philo_liv_arg->index = i;
 		philo_monitoring_arg->philo_state = philo_state;
-		philo_monitoring_arg->index = i + 1;
+		philo_monitoring_arg->index = i;
 		pthread_create(&philo_state->philos[i].tid, NULL, &philo_living_routine, philo_liv_arg);
 		pthread_create(&philo_state->philos[i].tid, NULL, &philo_monitoring_routine, philo_monitoring_arg);
 		i++;

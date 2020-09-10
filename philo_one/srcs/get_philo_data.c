@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 14:01:19 by user42            #+#    #+#             */
-/*   Updated: 2020/09/10 15:03:06 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/10 17:23:12 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_bool		get_philo_data(int argc, char const *argv[], t_philo_state *philo_data)
 	
 	if (argc < 5 || argc > 6)
 		return (ft_perror(ERR_NB_ARGS));
-	g_philo_dead = 0;
+	philo_data->dead = 0;
 	if ((philo_data->n_philosophers = ft_atol(argv[1])) < 1||\
 	(philo_data->time_to_die = ft_atol(argv[2])) < 0||\
 	(philo_data->time_to_eat = ft_atol(argv[3])) < 0||\

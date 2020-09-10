@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:32:03 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/10 15:04:55 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/10 18:42:54 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,17 @@ void	write_philo_action(long int timestamp, long int philo_index,\
 		write(STDOUT_FILENO, "is sleeping", 11);
 	else if (action_type == T_THINKING)
 		write(STDOUT_FILENO, "is thinking", 11);
+	else if (action_type == T_DEAD)
+		write(STDOUT_FILENO, "is dead", 7);
 	write(STDOUT_FILENO, "\n", 1);
 }
 void	write_liv_philo_action(long int timestamp, long int philo_index,\
-							char action_type)
+							char action_type, t_philo_state *philo_state)
 {
-	if (!g_philo_dead)
+	pthread_mutex_lock(&philo_state->write_lock);
+	if (!philo_state->dead)
+	{
 		write_philo_action(timestamp, philo_index, action_type);
+	}
+	pthread_mutex_unlock(&philo_state->write_lock);
 }
