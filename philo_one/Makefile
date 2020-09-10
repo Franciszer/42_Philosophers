@@ -1,10 +1,13 @@
 # ___COMPILATION___
 
 CC= cc
-FLAGS= -Wall -Wextra -Werror
+FLAGS= -Wall -Wextra -Werror# -fsanitize=address
 SRCS=	srcs/main.c\
 		srcs/get_philo_data.c\
 		srcs/create_philosophers.c\
+		srcs/philo_routines.c\
+		srcs/write_philo_action.c\
+		srcs/end_philo.c\
 		srcs/lib/ft_atol.c\
 		srcs/lib/ft_perror.c\
 		srcs/lib/ft_putchar_fd.c\
@@ -12,7 +15,8 @@ SRCS=	srcs/main.c\
 		srcs/lib/ft_putnbr_fd.c\
 		srcs/lib/ft_putstr.c\
 		srcs/lib/ft_putstr_fd.c\
-		srcs/lib/ft_strlen.c
+		srcs/lib/ft_strlen.c\
+		srcs/lib/ft_usleep.c
 
 NAME= philo_one
 OBJS= ${SRCS:.c=.o}

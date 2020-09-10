@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/29 13:05:07 by user42            #+#    #+#             */
-/*   Updated: 2020/09/10 15:56:57 by frthierr         ###   ########.fr       */
+/*   Created: 2020/09/10 14:27:37 by frthierr          #+#    #+#             */
+/*   Updated: 2020/09/10 14:31:47 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int main(int argc, char const *argv[])
+void	ft_usleep(long int time_in_ms)
 {
-    t_philo_state philo_state;
+	long int	time_elapsed;
 
-    if (!get_philo_data(argc, argv, &philo_state))
-        return (1);
-    if (!create_philosophers(&philo_state))
-		return (ERR_RET(ERR_ALLOC));
-	if (!init_philo_threads(&philo_state))
-		return (ERR_RET(ERR_THREADS));
-	end_philo(&philo_state);
-    return (0);
+	time_elapsed = 0;
+	while ((time_elapsed = get_time_now(&time_elapsed)) < time_in_ms)
+		usleep(time_in_ms);
 }

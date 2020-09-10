@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   end_philo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/29 13:05:07 by user42            #+#    #+#             */
-/*   Updated: 2020/09/10 15:56:57 by frthierr         ###   ########.fr       */
+/*   Created: 2020/09/10 15:52:40 by frthierr          #+#    #+#             */
+/*   Updated: 2020/09/10 15:56:01 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
 
-int main(int argc, char const *argv[])
+void	end_philo(t_philo_state *philo_state)
 {
-    t_philo_state philo_state;
+	long int	i;
 
-    if (!get_philo_data(argc, argv, &philo_state))
-        return (1);
-    if (!create_philosophers(&philo_state))
-		return (ERR_RET(ERR_ALLOC));
-	if (!init_philo_threads(&philo_state))
-		return (ERR_RET(ERR_THREADS));
-	end_philo(&philo_state);
-    return (0);
+	i = 0;
+	while (i < philo_state->n_philosophers)
+	{
+		pthread_join(philo_state->philos[i].tid, NULL);
+		i++;
+	}
+	free(philo_state);
 }

@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/09 18:52:13 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/10 15:59:26 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,29 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+# include <pthread.h>
+
+# define T_TAKEN_FORK 1
+# define T_EATING 2
+# define T_SLEEPING 3
+# define T_THINKING 4
+# define T_DEAD 5
+
+# define WRITE_PHILO_ACTION(type) write_liv_philo_action\
+						(get_time_now(&philo_state->start_time), index, type)
+
+/*
+** STRUCTURE DEFINITIONS
+*/
 
 typedef char	t_bool;
 
 typedef struct 	s_philo
 {
 	long int		last_eat;
-	int				index;
+	long int		index;
+	pthread_t		tid;
+	pthread_mutex_t	lock;
 	struct s_philo	*next;
 }				t_philo;
 
@@ -39,9 +55,19 @@ typedef struct  s_philo_state
 	t_philo			*philos;
 }               t_philo_state;
 
-
+typedef struct	s_philo_arg
+{
+	t_philo_state	*philo_state;
+	long int		index;
+}				t_philo_arg;
 
 typedef struct timeval t_timeval;
+
+/*
+** GLOBAL VARIABLES
+*/
+
+t_bool				g_philo_dead;
 
 /*
 **	ERROR HANDLING
@@ -55,19 +81,24 @@ typedef struct timeval t_timeval;
  [number_of_time_each_philosophers_must_eat]\n"
 # define ERR_GET_TIME "could not get the program start time"
 # define ERR_NEGATIVE_ARG "all arguments must be positive integers"
+# define ERR_THREADS "could not do thread processing"
+# define ERR_END_THREADS "could not close threads"
+
+t_bool			create_philosophers_return(t_philo_state *philo_state);
 
 /*
 ** LIB FUNCTIONS
 */
 
 size_t			ft_strlen(const char *str);
-void			ft_putnbr_fd(int n, int fd);
+void			ft_putnbr_fd(long n, int fd);
 void			ft_putchar_fd(char c, int fd);
 void			ft_putstr(char *s);
 void			ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 long			ft_atol(const char *str);
 int				ft_perror(char *msg);
+void			ft_usleep(long int time_in_ms);
 
 
 /*
@@ -75,8 +106,21 @@ int				ft_perror(char *msg);
 */
 
 t_bool           get_philo_data(int argc, char const *argv[], t_philo_state *philo_data);
-long int	    get_time_now(void);
 t_bool			create_philosophers(t_philo_state *philo_state);
+t_bool			init_philo_threads(t_philo_state *philo_state);
+
+/*
+** PHILO HANDLING
+*/
+
+void			write_philo_action(long int timestamp, long int philo_index,\
+														char action_type);
+void			write_liv_philo_action(long int timestamp, long int philo_index,\
+														char action_type);
+long int		get_time_now(long int *start_time);
+void			*philo_living_routine(void *philo_arg);
+void			*philo_monitoring_routine(void *philo_arg);
+void			end_philo(t_philo_state *philo_state);
 
 /*
 ** DEFINED VALUES
