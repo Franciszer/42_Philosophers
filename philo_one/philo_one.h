@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/10 17:23:00 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/13 17:26:51 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef char	t_bool;
 typedef struct 	s_philo
 {
 	long int		last_eat;
-	long int		index;
+	long int		meal_counter;
 	pthread_t		tid;
 	pthread_mutex_t	lock;
 	struct s_philo	*next;
@@ -52,6 +52,7 @@ typedef struct  s_philo_state
     long int        time_to_sleep;
     long int        max_eat_count;
     long int        start_time;
+	t_bool			who_ate;
 	t_bool			dead;
 	pthread_mutex_t	write_lock;
 	t_philo			*philos;
@@ -116,6 +117,7 @@ void	write_liv_philo_action(long int timestamp, long int philo_index,\
 long int		get_time_now(long int *start_time);
 void			*philo_living_routine(void *philo_arg);
 void			*philo_monitoring_routine(void *philo_arg);
+void			register_meal(t_philo_state *philo_state, long int index);
 void			end_philo(t_philo_state *philo_state);
 
 /*

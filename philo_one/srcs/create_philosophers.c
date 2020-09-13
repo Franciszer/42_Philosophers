@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 18:23:16 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/10 17:35:19 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/13 17:26:58 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,10 @@ t_bool	create_philosophers(t_philo_state *philo_state)
 	pthread_mutex_init(&philo_state->write_lock, NULL);
 	while (++i < philo_state->n_philosophers)
 	{
+		philo_state->philos[i].meal_counter = 0;
 		if (pthread_mutex_init(&philo_state->philos[i].lock, NULL))
 			return (create_philosophers_return(philo_state));
-		philo_state->philos[i].index = i + 1;
 		philo_state->philos[i].last_eat = 0;
-		// printf("index: %ld | max: %ld\n", i, philo_state->n_philosophers);
 		if (i < philo_state->n_philosophers - 1)
 			philo_state->philos[i].next = &philo_state->philos[i + 1];
 	}
@@ -43,7 +42,7 @@ t_bool	create_philosophers_return(t_philo_state *philo_state)
 
 t_bool	init_philo_threads(t_philo_state *philo_state)
 {
-	long int			i;
+	long int	i;
 	t_philo_arg	*philo_liv_arg;
 	t_philo_arg	*philo_monitoring_arg;
 

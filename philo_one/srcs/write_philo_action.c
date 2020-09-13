@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:32:03 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/10 18:42:54 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/13 17:21:27 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	write_philo_action(long int timestamp, long int philo_index,\
 							char action_type)
 {
+	write(STDOUT_FILENO, "[", 1);
 	ft_putnbr_fd(timestamp, STDOUT_FILENO);
-	write(STDOUT_FILENO, " ", 1);
+	write(STDOUT_FILENO, "] ", 2);
 	ft_putnbr_fd(philo_index, STDOUT_FILENO);
 	write(STDOUT_FILENO, " ", 1);
 	if (action_type == T_TAKEN_FORK)
