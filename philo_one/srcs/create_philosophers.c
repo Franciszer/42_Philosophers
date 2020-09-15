@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 18:23:16 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/13 17:26:58 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/15 14:42:28 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_bool	init_philo_threads(t_philo_state *philo_state)
 {
 	long int	i;
 	t_philo_arg	*philo_liv_arg;
-	t_philo_arg	*philo_monitoring_arg;
+	t_philo_arg *philo_monitoring_arg;
 
 	i = 0;
 	while (i < philo_state->n_philosophers)
@@ -57,8 +57,8 @@ t_bool	init_philo_threads(t_philo_state *philo_state)
 		philo_liv_arg->index = i;
 		philo_monitoring_arg->philo_state = philo_state;
 		philo_monitoring_arg->index = i;
-		pthread_create(&philo_state->philos[i].tid, NULL, &philo_living_routine, philo_liv_arg);
-		pthread_create(&philo_state->philos[i].tid, NULL, &philo_monitoring_routine, philo_monitoring_arg);
+		pthread_create(&philo_state->philos[i].liv_tid, NULL, &philo_living_routine, philo_liv_arg);
+		pthread_create(&philo_state->philos[i].mon_tid, NULL, &philo_monitoring_routine, philo_monitoring_arg);
 		i++;
 	}
 	return (1);

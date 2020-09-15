@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/13 17:26:51 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/15 14:40:50 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ typedef struct 	s_philo
 {
 	long int		last_eat;
 	long int		meal_counter;
-	pthread_t		tid;
+	pthread_t		liv_tid;
+	pthread_t		mon_tid;
 	pthread_mutex_t	lock;
 	struct s_philo	*next;
 }				t_philo;
@@ -63,6 +64,14 @@ typedef struct	s_philo_arg
 	t_philo_state	*philo_state;
 	long int		index;
 }				t_philo_arg;
+
+typedef	struct	s_mutex_handler
+{
+	pthread_mutex_t	*first;
+	pthread_mutex_t	*second;
+	t_bool			first_state;
+	t_bool			second_state;
+}				t_mutex_handler;
 
 typedef struct timeval t_timeval;
 

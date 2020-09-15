@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 15:52:40 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/13 17:35:39 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/15 14:58:02 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@ void	end_philo(t_philo_state *philo_state)
 
 	i = 0;
 	while (i < philo_state->n_philosophers)
-		pthread_join(philo_state->philos[i++].tid, NULL);
+	{
+		pthread_join(philo_state->philos[i].liv_tid, NULL);
+		pthread_join(philo_state->philos[i].mon_tid, NULL);
+		i++;
+	}
 	i = 0;
+	printf("END\n");
 	while (i < philo_state->n_philosophers)
 		pthread_mutex_destroy(&philo_state->philos[i++].lock);
 	free(philo_state->philos);

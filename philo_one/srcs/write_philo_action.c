@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:32:03 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/13 17:21:27 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/15 14:53:01 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	write_liv_philo_action(long int timestamp, long int philo_index,\
 {
 	pthread_mutex_lock(&philo_state->write_lock);
 	if (!philo_state->dead)
-	{
 		write_philo_action(timestamp, philo_index, action_type);
-	}
+	if (action_type == T_DEAD)
+		philo_state->dead = 1;
 	pthread_mutex_unlock(&philo_state->write_lock);
 }
