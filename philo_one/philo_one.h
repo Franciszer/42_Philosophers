@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/15 14:40:50 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/15 16:01:11 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct 	s_philo
 	pthread_t		liv_tid;
 	pthread_t		mon_tid;
 	pthread_mutex_t	lock;
+	t_bool			is_eating;
 	struct s_philo	*next;
 }				t_philo;
 
