@@ -3,7 +3,7 @@
 CC= cc
 FLAGS= -Wall -Wextra -Werror -pthread # -fsanitize=address
 SRCS=	srcs/main.c\
-		srcs/get_philo_data.c\
+		srcs/get_philo_state.c\
 		srcs/create_philosophers.c\
 		srcs/philo_routines.c\
 		srcs/write_philo_action.c\

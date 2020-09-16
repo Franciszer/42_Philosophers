@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:32:03 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/15 14:53:01 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/16 13:12:39 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	write_philo_action(long int timestamp, long int philo_index,\
 		write(STDOUT_FILENO, "is dead", 7);
 	write(STDOUT_FILENO, "\n", 1);
 }
+
 void	write_liv_philo_action(long int timestamp, long int philo_index,\
 							char action_type, t_philo_state *philo_state)
 {

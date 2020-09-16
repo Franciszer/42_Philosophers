@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 18:23:16 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/15 18:45:16 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/16 13:10:30 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ t_bool	init_philo_threads(t_philo_state *philo_state)
 		philo_liv_arg->philo_state = philo_state;
 		philo_liv_arg->index = i;
 		philo_state->philos[i].last_eat = 0;
-		pthread_create(&philo_state->philos[i].liv_tid, NULL, &philo_living_routine, philo_liv_arg);
-		// pthread_detach(philo_state->philos[i].liv_tid);
+		pthread_create(&philo_state->philos[i].liv_tid\
+						, NULL, &philo_living_routine, philo_liv_arg);
 		i++;
 	}
 	return (1);

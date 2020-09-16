@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:01:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/15 18:52:14 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/16 13:34:40 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,56 +23,57 @@ void	*philo_living_routine(void *philo_arg)
 		ft_usleep(philo_state->time_to_eat / 10);
 	while (!philo_state->dead)
 	{
-		if (get_time_now(&philo_state->start_time)  - philo_state->philos[index].last_eat >= philo_state->time_to_die)
-			write_liv_philo_action(get_time_now(&philo_state->start_time), index + 1, T_DEAD, philo_state);
-		pthread_mutex_lock(&philo_state->philos[index].lock);
-		WRITE_PHILO_ACTION(T_TAKEN_FORK);
-		if (get_time_now(&philo_state->start_time)  - philo_state->philos[index].last_eat >= philo_state->time_to_die)
-			write_liv_philo_action(get_time_now(&philo_state->start_time), index + 1, T_DEAD, philo_state);
-		pthread_mutex_lock(&philo_state->philos[index].next->lock);
-		if (get_time_now(&philo_state->start_time)  - philo_state->philos[index].last_eat >= philo_state->time_to_die)
-			write_liv_philo_action(get_time_now(&philo_state->start_time), index + 1, T_DEAD, philo_state);
-		WRITE_PHILO_ACTION(T_TAKEN_FORK);
-		WRITE_PHILO_ACTION(T_EATING);
-		philo_state->philos[index].last_eat = get_time_now(&philo_state->start_time);
+		philo_meal_prep(philo_state, index);
 		ft_usleep(philo_state->time_to_eat);
 		pthread_mutex_unlock(&philo_state->philos[index].lock);
 		pthread_mutex_unlock(&philo_state->philos[index].next->lock);
 		register_meal(philo_state, index);
-		WRITE_PHILO_ACTION(T_SLEEPING);
+		write_liv_philo_action(get_time_now(&philo_state->start_time),\
+											index + 1, T_SLEEPING, philo_state);
 		ft_usleep(philo_state->time_to_sleep);
-		WRITE_PHILO_ACTION(T_THINKING);
+		write_liv_philo_action(get_time_now(&philo_state->start_time),\
+											index + 1, T_THINKING, philo_state);
 	}
 	free(philo_arg);
-	// printf("/%ld/ liv end\n", index + 1);
 	return (NULL);
 }
 
-// void	*philo_monitoring_routine(void *philo_arg)
-// {
-// 	t_philo_state	*philo_state;
-// 	long int		index;
+void	philo_meal_prep(t_philo_state *philo_state, long int index)
+{
+	long int	displayed_index;
 
-// 	philo_state = ((t_philo_arg*)philo_arg)->philo_state;
-// 	index = ((t_philo_arg*)philo_arg)->index;
-// 	while (!philo_state->philos[index].is_eating && !philo_state->dead)
-// 	{
-// 		if (get_time_now(&philo_state->start_time)  - philo_state->philos[index].last_eat >= philo_state->time_to_die)
-// 		{
-// 			write_liv_philo_action(get_time_now(&philo_state->start_time), index + 1, T_DEAD, philo_state);
-// 			return (NULL);
-// 		}
-// 		ft_usleep(100);
-// 	}
-// 	return (NULL);
-// }
+	displayed_index = index + 1;
+	if (get_time_now(&philo_state->start_time) -\
+	philo_state->philos[index].last_eat >= philo_state->time_to_die)
+		write_liv_philo_action(get_time_now(&philo_state->start_time),\
+								displayed_index, T_DEAD, philo_state);
+	pthread_mutex_lock(&philo_state->philos[index].lock);
+	write_liv_philo_action(get_time_now(&philo_state->start_time),\
+										index + 1, T_TAKEN_FORK, philo_state);
+	if (get_time_now(&philo_state->start_time) -\
+	philo_state->philos[index].last_eat >= philo_state->time_to_die)
+		write_liv_philo_action(get_time_now(&philo_state->start_time),\
+								displayed_index, T_DEAD, philo_state);
+	pthread_mutex_lock(&philo_state->philos[index].next->lock);
+	if (get_time_now(&philo_state->start_time) -\
+	philo_state->philos[index].last_eat >= philo_state->time_to_die)
+		write_liv_philo_action(get_time_now(&philo_state->start_time),\
+								displayed_index, T_DEAD, philo_state);
+	write_liv_philo_action(get_time_now(&philo_state->start_time),\
+									index + 1, T_TAKEN_FORK, philo_state);
+	write_liv_philo_action(get_time_now(&philo_state->start_time),\
+									index + 1, T_EATING, philo_state);
+	philo_state->philos[index].last_eat =\
+									get_time_now(&philo_state->start_time);
+}
 
 void	register_meal(t_philo_state *philo_state, long int index)
 {
 	if (!philo_state->dead && philo_state->max_eat_count != NOT_SET)
 	{
 		philo_state->philos[index].meal_counter++;
-		if (philo_state->philos[index].meal_counter == philo_state->max_eat_count)
+		if (philo_state->philos[index].meal_counter ==\
+			philo_state->max_eat_count)
 			philo_state->who_ate++;
 		if (philo_state->who_ate == philo_state->n_philosophers)
 			philo_state->dead = 1;
