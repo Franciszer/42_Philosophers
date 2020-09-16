@@ -6,11 +6,11 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/15 18:40:38 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/09 16:25:56 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/16 15:52:25 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_three.h"
 
 void	ft_putstr(char *s)
 {

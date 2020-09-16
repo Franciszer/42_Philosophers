@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   ft_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/24 14:37:20 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/16 15:52:19 by frthierr         ###   ########.fr       */
+/*   Created: 2020/09/10 14:27:37 by frthierr          #+#    #+#             */
+/*   Updated: 2020/09/16 15:52:34 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-void	ft_putendl_fd(char *s, int fd)
+void	ft_usleep(long int time_in_ms)
 {
-	ft_putstr_fd((char*)s, fd);
-	ft_putchar_fd('\n', fd);
+	long int	start_time;
+
+	start_time = 0;
+	start_time = get_time_now(&start_time);
+	while (get_time_now(&start_time) < time_in_ms)
+		usleep(time_in_ms / 10);
 }

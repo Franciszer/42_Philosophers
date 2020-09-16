@@ -6,11 +6,11 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:35:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/09 16:22:20 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/16 15:52:31 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_three.h"
 
 size_t	ft_strlen(const char *str)
 {

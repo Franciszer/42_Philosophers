@@ -6,11 +6,11 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 14:40:31 by user42            #+#    #+#             */
-/*   Updated: 2020/09/09 16:26:39 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/16 15:52:07 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_three.h"
 
 long	ft_atol(const char *str)
 {
