@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 14:01:19 by user42            #+#    #+#             */
-/*   Updated: 2020/09/13 16:31:33 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:44:54 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 t_bool		get_philo_data(int argc, char const *argv[], t_philo_state *philo_data)
 {
-	t_timeval	timeval;
-	
 	if (argc < 5 || argc > 6)
 		return (ft_perror(ERR_NB_ARGS));
 	philo_data->dead = 0;
@@ -26,10 +24,9 @@ t_bool		get_philo_data(int argc, char const *argv[], t_philo_state *philo_data)
 	(argv[5] && (philo_data->max_eat_count = ft_atol(argv[5])) < 0 &&\
 	philo_data->max_eat_count != NOT_SET))
 		return (ft_perror(ERR_NEGATIVE_ARG));
+	if (philo_data->n_philosophers == 1)
+		return (ft_perror(ERR_ONE_PHILO));
 	philo_data->who_ate = 0;
- 	if (gettimeofday(&timeval, NULL) != 0)
-		return (ft_perror(ERR_GET_TIME));
-	philo_data->start_time = timeval.tv_sec * 1000 + timeval.tv_usec / 1000;
 	return (1);
 }
 

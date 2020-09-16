@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/15 16:01:11 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/15 18:26:08 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef struct timeval t_timeval;
 # define ERR_NEGATIVE_ARG "all arguments must be positive integers"
 # define ERR_THREADS "could not do thread processing"
 # define ERR_END_THREADS "could not close threads"
+# define ERR_ONE_PHILO "there needs to be atleast 2 philosophers"
 
 t_bool			create_philosophers_return(t_philo_state *philo_state);
 
