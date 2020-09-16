@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_one.h                                        :+:      :+:    :+:   */
+/*   philo_two.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/16 14:49:55 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/16 14:56:42 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_ONE_H
+#ifndef PHILO_TWO_H
 
-# define PHILO_ONE_H
+# define PHILO_TWO_H
 
 # include <sys/time.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <semaphore.h>
+# include <string.h>
 
 # define T_TAKEN_FORK 1
 # define T_EATING 2
@@ -37,8 +39,6 @@ typedef struct	s_philo
 	long int		last_eat;
 	long int		meal_counter;
 	pthread_t		liv_tid;
-	pthread_t		mon_tid;
-	pthread_mutex_t	lock;
 	struct s_philo	*next;
 }				t_philo;
 
@@ -52,7 +52,8 @@ typedef struct	s_philo_state
 	long int		start_time;
 	long int		who_ate;
 	t_bool			dead;
-	pthread_mutex_t	write_lock;
+	sem_t			*forks;
+	sem_t			*write_lock;
 	t_philo			*philos;
 }				t_philo_state;
 
@@ -62,15 +63,14 @@ typedef struct	s_philo_arg
 	long int		index;
 }				t_philo_arg;
 
-typedef	struct	s_mutex_handler
-{
-	pthread_mutex_t	*first;
-	pthread_mutex_t	*second;
-	t_bool			first_state;
-	t_bool			second_state;
-}				t_mutex_handler;
-
 typedef struct timeval	t_timeval;
+
+/*
+** SEMAPHORE NAMES
+*/
+
+# define SEM_FORKS "sem_forks"
+# define SEM_WRITE "sem_write"
 
 /*
 **	ERROR HANDLING
@@ -100,6 +100,7 @@ void			ft_putendl_fd(char *s, int fd);
 long			ft_atol(const char *str);
 int				ft_perror(char *msg);
 void			ft_usleep(long int time_in_ms);
+char			*ft_itoa(int n);
 
 /*
 ** INITIALIZING DATA
@@ -109,6 +110,7 @@ t_bool			get_philo_state\
 				(int argc, char const *argv[], t_philo_state *philo_data);
 t_bool			create_philosophers(t_philo_state *philo_state);
 t_bool			init_philo_threads(t_philo_state *philo_state);
+char			*name_semaphore(long int index);
 
 /*
 ** PHILO HANDLING

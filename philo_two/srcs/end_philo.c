@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   end_philo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/15 18:40:38 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/16 13:50:25 by frthierr         ###   ########.fr       */
+/*   Created: 2020/09/10 15:52:40 by frthierr          #+#    #+#             */
+/*   Updated: 2020/09/16 15:02:12 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_two.h"
 
-void	ft_putstr(char *s)
+void	end_philo(t_philo_state *philo_state)
 {
-	while (s && *s)
+	long int	i;
+
+	i = 0;
+	while (i < philo_state->n_philosophers)
 	{
-		ft_putchar_fd(*s, 1);
-		s++;
+		pthread_join(philo_state->philos[i].liv_tid, NULL);
+		i++;
 	}
-	return ;
+	i = 0;
+	sem_close(philo_state->forks);
+	sem_close(philo_state->write_lock);
+	free(philo_state->philos);
 }

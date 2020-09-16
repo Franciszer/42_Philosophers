@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 18:23:16 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/16 13:10:30 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/16 15:05:24 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ t_bool	create_philosophers(t_philo_state *philo_state)
 	pthread_mutex_init(&philo_state->write_lock, NULL);
 	while (++i < philo_state->n_philosophers)
 	{
-		philo_state->philos[i].is_eating = 0;
 		philo_state->philos[i].meal_counter = 0;
 		if (pthread_mutex_init(&philo_state->philos[i].lock, NULL))
 			return (create_philosophers_return(philo_state));

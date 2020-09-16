@@ -6,11 +6,11 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/24 14:37:29 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/09 16:21:21 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/16 13:50:15 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo_one.h"
+#include "philo_two.h"
 
 void	ft_putchar_fd(char c, int fd)
 {
