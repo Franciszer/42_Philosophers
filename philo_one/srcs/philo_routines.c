@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:01:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/17 14:06:18 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 14:10:31 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	*philo_monitoring_routine(void *philo_arg)
 		if (get_time_now(&philo_state->start_time) - philo_state->philos[index].last_eat >= philo_state->time_to_die)
 			write_liv_philo_action(get_time_now(&philo_state->start_time),\
 				index + 1, T_DEAD, philo_state);
+		ft_usleep(5);
 	}
 	return(NULL);	
 }
