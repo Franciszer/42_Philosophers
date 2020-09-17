@@ -6,13 +6,13 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/17 16:13:23 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 18:33:09 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_TWO_H
+#ifndef PHILO_THREE_H
 
-# define PHILO_TWO_H
+# define PHILO_THREE_H
 
 # include <sys/time.h>
 # include <unistd.h>
@@ -85,7 +85,7 @@ typedef struct timeval	t_timeval;
 # define ERR_ALLOC	"data allocation failed"
 # define ERR_NB_ARGS "invalid arguments"
 # define ERR_GET_TIME "could not get the program start time"
-# define ERR_NEGATIVE_ARG "all arguments must be positive integers"
+# define ERR_NEGATIVE_ARG "all arguments must be strictly positive integers"
 # define ERR_THREADS "could not do thread processing"
 # define ERR_END_THREADS "could not close threads"
 # define ERR_ONE_PHILO "there needs to be atleast 2 philosophers"

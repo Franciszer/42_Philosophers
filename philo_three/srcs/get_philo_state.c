@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 14:01:19 by user42            #+#    #+#             */
-/*   Updated: 2020/09/17 16:12:46 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 17:54:59 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ t_bool		get_philo_state(int argc, char const *argv[],\
 	if (philo_state->n_philosophers == 1)
 		return (ft_perror(ERR_ONE_PHILO));
 	sem_unlink(SEM_DEAD);
-	philo_state->someone_dead =\
-	sem_open(SEM_DEAD, O_CREAT, 755, 0);
+	philo_state->someone_dead = sem_open(SEM_DEAD, O_CREAT, 755, 0);
 	sem_unlink(SEM_FORKS);
 	philo_state->forks =\
 	sem_open(SEM_FORKS, O_CREAT, 755,\

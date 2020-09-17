@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/17 14:21:00 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 18:32:51 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct timeval	t_timeval;
 # define ERR_ALLOC	"data allocation failed"
 # define ERR_NB_ARGS "invalid arguments"
 # define ERR_GET_TIME "could not get the program start time"
-# define ERR_NEGATIVE_ARG "all arguments must be positive integers"
+# define ERR_NEGATIVE_ARG "all arguments strictly must be positive integers"
 # define ERR_THREADS "could not do thread processing"
 # define ERR_END_THREADS "could not close threads"
 # define ERR_ONE_PHILO "there needs to be atleast 2 philosophers"
