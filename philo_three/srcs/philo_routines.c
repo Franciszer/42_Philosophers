@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:01:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/17 18:26:12 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 18:45:15 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ void	*philo_monitoring_routine(void *philo_arg)
 			write_liv_philo_action(get_time_now(&philo_state->start_time),\
 				index + 1, T_DEAD, philo_state);
 			sem_post(philo_state->someone_dead);
-			while (1)
-				sem_wait(philo_state->write_lock);
 		}
 		ft_usleep(5);
 	}
