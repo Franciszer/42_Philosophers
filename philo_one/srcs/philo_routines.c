@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:01:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/17 14:10:31 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 14:17:37 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	*philo_living_routine(void *philo_arg)
 	index = ((t_philo_arg*)philo_arg)->index;
 	if (index % 2 == 1)
 		ft_usleep(philo_state->time_to_eat / 10);
-	pthread_create(&philo_state->philos[index].mon_tid, NULL, &philo_monitoring_routine, philo_arg);
+	pthread_create(&philo_state->philos[index].mon_tid, NULL,\
+	&philo_monitoring_routine, philo_arg);
 	pthread_detach(philo_state->philos[index].mon_tid);
 	while (!philo_state->dead)
 	{
@@ -50,7 +51,8 @@ void	philo_meal_prep(t_philo_state *philo_state, long int index)
 									index + 1, T_TAKEN_FORK, philo_state);
 	write_liv_philo_action(get_time_now(&philo_state->start_time),\
 									index + 1, T_EATING, philo_state);
-	philo_state->philos[index].last_eat = get_time_now(&philo_state->start_time);
+	philo_state->philos[index].last_eat =\
+						get_time_now(&philo_state->start_time);
 }
 
 void	register_meal(t_philo_state *philo_state, long int index)
@@ -75,10 +77,11 @@ void	*philo_monitoring_routine(void *philo_arg)
 	index = ((t_philo_arg*)philo_arg)->index;
 	while (!philo_state->dead)
 	{
-		if (get_time_now(&philo_state->start_time) - philo_state->philos[index].last_eat >= philo_state->time_to_die)
+		if (get_time_now(&philo_state->start_time) -\
+		philo_state->philos[index].last_eat >= philo_state->time_to_die)
 			write_liv_philo_action(get_time_now(&philo_state->start_time),\
 				index + 1, T_DEAD, philo_state);
 		ft_usleep(5);
 	}
-	return(NULL);	
+	return (NULL);
 }

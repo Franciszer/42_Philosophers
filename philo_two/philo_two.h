@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/16 14:56:42 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 14:18:36 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct	s_philo
 	long int		last_eat;
 	long int		meal_counter;
 	pthread_t		liv_tid;
+	pthread_t		mon_tid;
 	struct s_philo	*next;
 }				t_philo;
 
