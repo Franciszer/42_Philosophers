@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_routines.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:01:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/17 18:45:15 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 21:12:17 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	philo_living_routine(void *philo_arg)
 		ft_usleep(philo_state->time_to_eat);
 		sem_post(philo_state->forks);
 		sem_post(philo_state->forks);
-		register_meal(philo_state, index);
+		// register_meal(philo_state, index);
 		write_liv_philo_action(get_time_now(&philo_state->start_time),\
 											index + 1, T_SLEEPING, philo_state);
 		ft_usleep(philo_state->time_to_sleep);
@@ -55,12 +55,14 @@ void	register_meal(t_philo_state *philo_state, long int index)
 {
 	if (!philo_state->dead && philo_state->max_eat_count != NOT_SET)
 	{
-		philo_state->philos[index].meal_counter++;
-		if (philo_state->philos[index].meal_counter ==\
-			philo_state->max_eat_count)
-			philo_state->who_ate++;
-		if (philo_state->who_ate == philo_state->n_philosophers)
-			philo_state->dead = 1;
+		if (philo_state->philos[index].ate !=\
+		philo_state->max_eat_count)
+			++philo_state->philos[index].ate;
+		else
+		{
+			sem_post(philo_state->everybody_ate);
+			philo_state->max_eat_count = NOT_SET;
+		}
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_three.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/17 18:33:09 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 20:58:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct	s_philo
 	long int		meal_counter;
 	pthread_t		dead_tid;
 	pthread_t		mon_tid;
+	long int		ate;
 	pid_t			liv_pid;
 	struct s_philo	*next;
 }				t_philo;
@@ -59,6 +60,7 @@ typedef struct	s_philo_state
 	sem_t			*someone_dead;
 	sem_t			*forks;
 	sem_t			*write_lock;
+	sem_t			*everybody_ate;
 	t_philo			*philos;
 }				t_philo_state;
 
@@ -77,6 +79,7 @@ typedef struct timeval	t_timeval;
 # define SEM_DEAD "sem_dead"
 # define SEM_FORKS "sem_forks"
 # define SEM_WRITE "sem_write"
+# define SEM_EAT "sem_eat"
 
 /*
 **	ERROR HANDLING

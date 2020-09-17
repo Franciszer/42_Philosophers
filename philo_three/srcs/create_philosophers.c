@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_philosophers.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/09 18:23:16 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/17 16:01:37 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 20:58:29 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_bool	create_philosophers(t_philo_state *philo_state)
 	i = -1;
 	while (++i < philo_state->n_philosophers)
 	{
+		philo_state->philos[i].ate = 0;
 		philo_state->philos[i].meal_counter = 0;
 		if (i < philo_state->n_philosophers - 1)
 			philo_state->philos[i].next = &philo_state->philos[i + 1];
