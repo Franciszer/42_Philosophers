@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:01:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/17 14:24:06 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 14:40:18 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,3 @@ void	*philo_monitoring_routine(void *philo_arg)
 	}
 	return (NULL);
 }
-
-

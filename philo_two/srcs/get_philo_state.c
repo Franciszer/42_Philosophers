@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 14:01:19 by user42            #+#    #+#             */
-/*   Updated: 2020/09/16 15:45:14 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 14:40:00 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ t_bool		get_philo_state(int argc, char const *argv[],\
 	(argv[5] && (philo_state->max_eat_count = ft_atol(argv[5])) < 0 &&\
 	philo_state->max_eat_count != NOT_SET))
 		return (ft_perror(ERR_NEGATIVE_ARG));
+	if (!argv[5])
+		philo_state->max_eat_count = NOT_SET;
 	if (philo_state->n_philosophers == 1)
 		return (ft_perror(ERR_ONE_PHILO));
 	sem_unlink(SEM_FORKS);
