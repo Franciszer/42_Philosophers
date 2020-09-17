@@ -7,6 +7,7 @@ SRCS=	srcs/main.c\
 		srcs/create_philosophers.c\
 		srcs/philo_routines.c\
 		srcs/write_philo_action.c\
+		srcs/handle_philo_processes.c\
 		srcs/end_philo.c\
 		srcs/lib/ft_atol.c\
 		srcs/lib/ft_perror.c\

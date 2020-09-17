@@ -6,13 +6,13 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/16 16:11:42 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 16:13:23 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_THREE_H
+#ifndef PHILO_TWO_H
 
-# define PHILO_THREE_H
+# define PHILO_TWO_H
 
 # include <sys/time.h>
 # include <unistd.h>
@@ -20,7 +20,9 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <fcntl.h>
 # include <string.h>
+# include <signal.h>
 
 # define T_TAKEN_FORK 1
 # define T_EATING 2
@@ -38,11 +40,9 @@ typedef struct	s_philo
 {
 	long int		last_eat;
 	long int		meal_counter;
-	t_bool			dead;
-	pid_t			liv_pid;
-	pthread_t		liv_tid;
+	pthread_t		dead_tid;
 	pthread_t		mon_tid;
-	pthread_t		ded_tid;
+	pid_t			liv_pid;
 	struct s_philo	*next;
 }				t_philo;
 
@@ -55,7 +55,8 @@ typedef struct	s_philo_state
 	long int		max_eat_count;
 	long int		start_time;
 	long int		who_ate;
-	sem_t			dead;
+	t_bool			dead;
+	sem_t			*someone_dead;
 	sem_t			*forks;
 	sem_t			*write_lock;
 	t_philo			*philos;
@@ -73,9 +74,9 @@ typedef struct timeval	t_timeval;
 ** SEMAPHORE NAMES
 */
 
+# define SEM_DEAD "sem_dead"
 # define SEM_FORKS "sem_forks"
 # define SEM_WRITE "sem_write"
-# define SEM_DEAD "sem_dead"
 
 /*
 **	ERROR HANDLING
@@ -88,6 +89,7 @@ typedef struct timeval	t_timeval;
 # define ERR_THREADS "could not do thread processing"
 # define ERR_END_THREADS "could not close threads"
 # define ERR_ONE_PHILO "there needs to be atleast 2 philosophers"
+# define ERR_PROCESSES "error creating processes"
 
 t_bool			create_philosophers_return(t_philo_state *philo_state);
 
@@ -127,7 +129,9 @@ void			write_liv_philo_action\
 				(long int timestamp, long int philo_index,\
 				char action_type, t_philo_state *philo_state);
 long int		get_time_now(long int *start_time);
-void			*philo_living_routine(void *philo_arg);
+t_bool			create_processes(t_philo_state *philo_state);
+void			delete_processes(t_philo_state *philo_state);
+void			philo_living_routine(void *philo_arg);
 void			*philo_monitoring_routine(void *philo_arg);
 void			philo_meal_prep(t_philo_state *philo_state, long int index);
 void			register_meal(t_philo_state *philo_state, long int index);

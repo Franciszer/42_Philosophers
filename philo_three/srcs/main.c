@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 13:05:07 by user42            #+#    #+#             */
-/*   Updated: 2020/09/16 15:52:49 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 17:21:18 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int	main(int argc, char const *argv[])
 		return (1);
 	if (!create_philosophers(&philo_state))
 		return (ft_exit_error(1, ERR_ALLOC));
-	if (!init_philo_threads(&philo_state))
-		return (ft_exit_error(1, ERR_THREADS));
+	if (create_processes(&philo_state))
+		return (ft_exit_error(1, ERR_PROCESSES));
+	delete_processes(&philo_state);
 	end_philo(&philo_state);
 	return (0);
 }

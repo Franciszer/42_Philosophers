@@ -6,13 +6,13 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:01:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/16 16:00:31 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 16:53:25 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
 
-void	*philo_living_routine(void *philo_arg)
+void	philo_living_routine(void *philo_arg)
 {
 	t_philo_state	*philo_state;
 	long int		index;
@@ -21,7 +21,8 @@ void	*philo_living_routine(void *philo_arg)
 	index = ((t_philo_arg*)philo_arg)->index;
 	if (index % 2 == 1)
 		ft_usleep(philo_state->time_to_eat / 10);
-	
+	pthread_create(&philo_state->philos[index].mon_tid, NULL,\
+	&philo_monitoring_routine, philo_arg);
 	while (!philo_state->dead)
 	{
 		philo_meal_prep(philo_state, index);
@@ -35,31 +36,15 @@ void	*philo_living_routine(void *philo_arg)
 		write_liv_philo_action(get_time_now(&philo_state->start_time),\
 											index + 1, T_THINKING, philo_state);
 	}
-	free(philo_arg);
-	return (NULL);
+	return ;
 }
 
 void	philo_meal_prep(t_philo_state *philo_state, long int index)
 {
-	long int	displayed_index;
-
-	displayed_index = index + 1;
-	if (get_time_now(&philo_state->start_time) -\
-	philo_state->philos[index].last_eat >= philo_state->time_to_die)
-		write_liv_philo_action(get_time_now(&philo_state->start_time),\
-								displayed_index, T_DEAD, philo_state);
 	sem_wait(philo_state->forks);
 	write_liv_philo_action(get_time_now(&philo_state->start_time),\
 										index + 1, T_TAKEN_FORK, philo_state);
-	if (get_time_now(&philo_state->start_time) -\
-	philo_state->philos[index].last_eat >= philo_state->time_to_die)
-		write_liv_philo_action(get_time_now(&philo_state->start_time),\
-								displayed_index, T_DEAD, philo_state);
 	sem_wait(philo_state->forks);
-	if (get_time_now(&philo_state->start_time) -\
-	philo_state->philos[index].last_eat >= philo_state->time_to_die)
-		write_liv_philo_action(get_time_now(&philo_state->start_time),\
-								displayed_index, T_DEAD, philo_state);
 	write_liv_philo_action(get_time_now(&philo_state->start_time),\
 									index + 1, T_TAKEN_FORK, philo_state);
 	write_liv_philo_action(get_time_now(&philo_state->start_time),\
@@ -83,11 +68,22 @@ void	register_meal(t_philo_state *philo_state, long int index)
 
 void	*philo_monitoring_routine(void *philo_arg)
 {
-	t_philo_state	philo_state;
+	t_philo_state	*philo_state;
 	long int		index;
 
 	philo_state = ((t_philo_arg*)philo_arg)->philo_state;
 	index = ((t_philo_arg*)philo_arg)->index;
 	free(philo_arg);
-	while ()
+	while (!philo_state->dead)
+	{
+		if (get_time_now(&philo_state->start_time) -\
+		philo_state->philos[index].last_eat >= philo_state->time_to_die)
+		{
+			write_liv_philo_action(get_time_now(&philo_state->start_time),\
+				index + 1, T_DEAD, philo_state);
+			sem_post(philo_state->someone_dead);
+		}
+		ft_usleep(5);
+	}
+	return (NULL);
 }
