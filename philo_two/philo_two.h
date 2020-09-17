@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 12:56:55 by user42            #+#    #+#             */
-/*   Updated: 2020/09/17 14:18:36 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 14:21:00 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <semaphore.h>
+# include <fcntl.h>
 # include <string.h>
 
 # define T_TAKEN_FORK 1
