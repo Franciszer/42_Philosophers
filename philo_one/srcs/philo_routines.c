@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 14:01:42 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/17 14:04:44 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/17 14:06:18 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ void	*philo_living_routine(void *philo_arg)
 
 void	philo_meal_prep(t_philo_state *philo_state, long int index)
 {
-	long int	displayed_index;
-
-	displayed_index = index + 1;
 	pthread_mutex_lock(&philo_state->philos[index].lock);
 	write_liv_philo_action(get_time_now(&philo_state->start_time),\
 										index + 1, T_TAKEN_FORK, philo_state);
