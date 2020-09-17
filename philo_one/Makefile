@@ -1,7 +1,7 @@
 # ___COMPILATION___
 
 CC= cc
-FLAGS= -Wall -Wextra -Werror -pthread # -fsanitize=address
+FLAGS= -Wall -Wextra -Werror -pthread# -fsanitize=address
 SRCS=	srcs/main.c\
 		srcs/get_philo_state.c\
 		srcs/create_philosophers.c\
