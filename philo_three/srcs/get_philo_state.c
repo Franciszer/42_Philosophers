@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   get_philo_state.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 14:01:19 by user42            #+#    #+#             */
-/*   Updated: 2020/09/17 20:58:29 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/18 11:45:35 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_three.h"
+
+static void	init_semaphores(t_philo_state *philo_state)
+{
+	sem_unlink(SEM_EAT);
+	philo_state->everybody_ate =\
+		sem_open(SEM_EAT, O_CREAT, 755, 0);
+	sem_unlink(SEM_DEAD);
+	philo_state->someone_dead = sem_open(SEM_DEAD, O_CREAT, 755, 0);
+	sem_unlink(SEM_FORKS);
+	philo_state->forks =\
+		sem_open(SEM_FORKS, O_CREAT, 755,\
+		(unsigned int)philo_state->n_philosophers);
+	sem_unlink(SEM_WRITE);
+	philo_state->write_lock =\
+		sem_open(SEM_WRITE, O_CREAT, 755, 1);
+}
 
 t_bool		get_philo_state(int argc, char const *argv[],\
 							t_philo_state *philo_state)
@@ -27,19 +43,9 @@ t_bool		get_philo_state(int argc, char const *argv[],\
 		return (ft_perror(ERR_NEGATIVE_ARG));
 	if (!argv[5])
 		philo_state->max_eat_count = NOT_SET;
+	init_semaphores(philo_state);
 	if (philo_state->n_philosophers == 1)
 		return (ft_perror(ERR_ONE_PHILO));
-	sem_unlink(SEM_EAT);
-	sem_open(SEM_EAT, O_CREAT, 755, 0);
-	sem_unlink(SEM_DEAD);
-	philo_state->someone_dead = sem_open(SEM_DEAD, O_CREAT, 755, 0);
-	sem_unlink(SEM_FORKS);
-	philo_state->forks =\
-	sem_open(SEM_FORKS, O_CREAT, 755,\
-			(unsigned int)philo_state->n_philosophers);
-	sem_unlink(SEM_WRITE);
-	philo_state->write_lock =\
-	sem_open(SEM_WRITE, O_CREAT, 755, 1);
 	philo_state->who_ate = 0;
 	return (1);
 }

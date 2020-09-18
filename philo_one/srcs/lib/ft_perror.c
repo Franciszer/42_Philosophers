@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 19:20:07 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/16 13:41:20 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/18 11:42:34 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		ft_perror(char *msg)
 {
 	ft_putstr_fd("Error: ", STDERR_FILENO);
 	ft_putstr_fd(msg, STDERR_FILENO);
+	write(1, "\n", 1);
 	return (0);
 }
 

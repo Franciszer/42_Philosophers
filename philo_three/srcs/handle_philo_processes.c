@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_philo_processes.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 15:37:10 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/17 21:10:30 by user42           ###   ########.fr       */
+/*   Updated: 2020/09/18 11:35:25 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ void		*check_eat_routine(void *arg)
 	if (philo_state->max_eat_count != NOT_SET)
 	{
 		index = 0;
-		while (!philo_state->dead &&\
-		index < philo_state->max_eat_count)
+		while (index < philo_state->max_eat_count)
 		{
 			sem_wait(philo_state->everybody_ate);
 			index++;
@@ -72,10 +71,10 @@ void		*check_eat_routine(void *arg)
 void		delete_processes(t_philo_state *philo_state)
 {
 	long int	index;
-	// pthread_t	check_eat;
+	pthread_t	check_eat;
 
-	// pthread_create(&check_eat, NULL, &check_eat_routine, philo_state);
-	// pthread_detach(check_eat);
+	pthread_create(&check_eat, NULL, &check_eat_routine, philo_state);
+	pthread_detach(check_eat);
 	sem_wait(philo_state->someone_dead);
 	philo_state->dead = 1;
 	index = 0;

@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 14:40:31 by user42            #+#    #+#             */
-/*   Updated: 2020/09/17 15:27:26 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/18 11:41:20 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,13 @@ long	ft_atol(const char *str)
 		str++;
 	while (*str && *str >= '0' && *str <= '9')
 	{
-		number = number * 10 + (*str - '0');
-		str++;
+		if (*str >= '0' && *str <= '9')
+		{
+			number = number * 10 + (*str - '0');
+			str++;
+		}
+		else
+			return (0);
 	}
 	return (number * negative);
 }
