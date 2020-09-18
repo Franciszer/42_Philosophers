@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 15:37:10 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/18 12:00:47 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/18 16:55:54 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		*check_eat_routine(void *arg)
 	if (philo_state->max_eat_count != NOT_SET)
 	{
 		index = 0;
-		while (index < philo_state->max_eat_count)
+		while (index < philo_state->n_philosophers)
 		{
 			sem_wait(philo_state->everybody_ate);
 			index++;

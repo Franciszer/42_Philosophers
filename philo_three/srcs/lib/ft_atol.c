@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 14:40:31 by user42            #+#    #+#             */
-/*   Updated: 2020/09/18 11:41:20 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/18 12:07:10 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ long	ft_atol(const char *str)
 			str++;
 		}
 		else
-			return (0);
+			return (-1);
 	}
 	return (number * negative);
 }
