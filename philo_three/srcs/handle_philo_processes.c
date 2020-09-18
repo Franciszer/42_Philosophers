@@ -6,7 +6,7 @@
 /*   By: frthierr <frthierr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 15:37:10 by frthierr          #+#    #+#             */
-/*   Updated: 2020/09/18 11:35:25 by frthierr         ###   ########.fr       */
+/*   Updated: 2020/09/18 12:00:47 by frthierr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,11 @@ void		delete_processes(t_philo_state *philo_state)
 	long int	index;
 	pthread_t	check_eat;
 
-	pthread_create(&check_eat, NULL, &check_eat_routine, philo_state);
-	pthread_detach(check_eat);
+	if (philo_state->max_eat_count != NOT_SET)
+	{
+		pthread_create(&check_eat, NULL, &check_eat_routine, philo_state);
+		pthread_detach(check_eat);
+	}
 	sem_wait(philo_state->someone_dead);
 	philo_state->dead = 1;
 	index = 0;
